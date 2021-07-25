@@ -1,3 +1,4 @@
+//Registros
 struct pilha{
     int valorPilha;
     struct pilha* proxPilha;
@@ -7,7 +8,7 @@ struct fila{
     int valorFila;
     struct fila* proxFila; 
 };
-
+//Criando apelidos para as duas structs
 typedef struct pilha Pilha;
 typedef struct fila Fila;
 
@@ -23,7 +24,7 @@ int tamanhoPilha(Pilha* topo);
 int capturaFila(Fila* p);
 int capturaPilha(Pilha* p);
 Fila* liberaFila(Fila* p);
-Pilha* liberaPilha(Fila* topo);
+Pilha* liberaPilha(Pilha* topo);
 
 //Funções para o Menu
 void criarLinhaSuperior(int tamx);

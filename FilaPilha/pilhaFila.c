@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "pilhaFila.h"
-#define tam 40
+#define tam 40// Constante para a função menu
 
 Fila* insere(Fila* p,int valor){//Função que insere um valor na Fila
      Fila* novo = (Fila*)malloc(sizeof(Fila));//Cria meu Nó através de uma alocação Dinâmica
@@ -25,14 +25,15 @@ Fila* insere(Fila* p,int valor){//Função que insere um valor na Fila
     }
     return p;//retorna a Fila
 }
-Pilha* push(Pilha* topo,int x){
-    Pilha* novo =(Pilha*)malloc(sizeof(Pilha));
-    if(novo == NULL){
+
+Pilha* push(Pilha* topo,int x){//Função que cria elementos para a Pilha
+    Pilha* novo =(Pilha*)malloc(sizeof(Pilha));//Alocação Dinamica
+    if(novo == NULL){//Verifica a alocação
         printf("Erro na alocacao de memoria!");
-        exit(1);
+        exit(1);//encerra o programa 
     }
-    novo->valorPilha=x;
-    novo->proxPilha=topo;
+    novo->valorPilha=x;//Faz o nó criado receber o valor do usuário
+    novo->proxPilha=topo;//Faz novo apontar para topo
     return novo;
 }
 
@@ -70,73 +71,75 @@ void imprimePilha(Pilha* topo){
          printf("\n|NULL|\n\n");
 }
 
-Fila* removeFila(Fila* p){
-    Fila* aux = p;
-    p = p->proxFila;
-    free(aux);
+Fila* removeFila(Fila* p){//Funçao que remove o primeiro elemento da Fila
+    Fila* aux = p;//Cria uma variável auxiliar
+    p = p->proxFila;//Faz o ponteiro avançar e apontar para o proximo elemento
+    free(aux);//Libera aux
     return p;
 }
 
-Pilha* removePilha(Pilha* topo){
-    Pilha* aux = topo;
-    topo = topo->proxPilha;
-    free(aux);
+Pilha* removePilha(Pilha* topo){//Função que remove o ultimo elemento da Pilha
+    Pilha* aux = topo;//Cria uma variável auxiliar
+    topo = topo->proxPilha;//Faz o ponteiro avançar e apontar para o proximo elemento
+    free(aux);//Libera aux
     return topo;
 }
 
-int tamanhoFila(Fila* p){
-    Fila* aux = p;
-    int contador = 0;
+int tamanhoFila(Fila* p){//Função que conta o tamanho da Fila
+    Fila* aux = p;//Ponteiro auxiliar
+    int contador = 0;//Variavel para armazenar o tamanho
     while(aux != NULL){
-       contador++;
-       aux =aux->proxFila;
+       contador++;//Incremento
+       aux =aux->proxFila;//Percorre os elementos até chegar em NULL
     }
-    printf("Tamanho: %d\n\n",contador);
+    printf("Tamanho: %d\n\n",contador);//Mostra na tela o tamanho da Fila
     return contador;
 }
 
-int tamanhoPilha(Pilha* topo){
-    Pilha* aux = topo;
-    int contador = 0;
+int tamanhoPilha(Pilha* topo){//Função que conta o tamanho da Pilha
+    Pilha* aux = topo;//Ponteiro auxiliar
+    int contador = 0;//Variavel para armazenar o tamanho
     while(aux != NULL){
-       contador++;
-       aux =aux->proxPilha;
+       contador++;//Incrementa
+       aux =aux->proxPilha;//Percorre os elementos até chegar em NULL
     }
-    printf("Tamanho: %d\n\n",contador);
+    printf("Tamanho: %d\n\n",contador);//Mostra na tela o tamanho da Pilha
     return contador;
 }
 
-int capturaFila(Fila* p){
-    Fila* aux = p;
-    int valor = aux->valorFila;
-    return valor;
+int capturaFila(Fila* p){//Funçao que pega o primeiro valor da Fila
+    Fila* aux = p;//Variavel auxiliar
+    int valor = aux->valorFila;//Faz a variavel receber o valor do elemento 
+    return valor;//retorna o valor
 }
 
-int capturaPilha(Pilha* p){
-    Pilha* aux = p;
-    int valor = aux->valorPilha;
-    return valor;
+int capturaPilha(Pilha* p){//Funçao que pega o ultimo valor da Fila
+    Pilha* aux = p;//Variavel auxiliar
+    int valor = aux->valorPilha;//Faz a variavel receber o valor do elemento
+    return valor;//retorna o valor
 }
 
-Fila* liberaFila(Fila* p){
-    Fila* ant = p;
+Fila* liberaFila(Fila* p){//Destroi a Fila
+    Fila* ant = p;//Ponteiro auxiliar
+    //Vai avançando e liberando a memória
     while(p != NULL){
         ant = p;
         p = p->proxFila;
-        free(ant);
+        free(ant);//Libera ant
     }
-    free(p);
+    free(p);//libera p
     return p;
 }
 
-Pilha* liberaPilha(Fila* topo){
-    Fila* ant = topo;
+Pilha* liberaPilha(Pilha* topo){//Destroi a Pilha
+    Pilha* ant = topo;//Ponteiro auxiliar
+    //Vai avançando e liberando a memória
     while(topo != NULL){
         ant = topo;
-        topo = topo->proxFila;
-        free(ant);
+        topo = topo->proxPilha;
+        free(ant);//Libera ant
     }
-    free(topo);
+    free(topo);//Libera topo
     return topo;
 }
 
@@ -176,7 +179,7 @@ void CriarMenu(int tamx,char str[]){//Criar linhas duplas nas laterais do Menu
     printf("%c\n",186);
 }
 void menuPrincipal(){
-   system("color F0");//Define a cor do terminal (4->Fundo e F->Cor das letras)
+   system("color F0");//Define a cor do terminal (F->Fundo e 0->Cor das letras)
    criarLinhaSuperior(tam);
    CriarMenu(tam,"Menu Principal");
    CriarMenu(tam,"0 - Sair");
@@ -186,7 +189,7 @@ void menuPrincipal(){
 }
 
 void menuFila(){
-   system("color F0");//Define a cor do terminal (4->Fundo e F->Cor das letras)
+   system("color F0");//Define a cor do terminal (F->Fundo e 0->Cor das letras)
    criarLinhaSuperior(tam);
    CriarMenu(tam,"Menu FILA");
    CriarMenu(tam,"1 - Faz uma copia para PILHA");
@@ -195,7 +198,7 @@ void menuFila(){
 }
 
 void menuPilha(){
-   system("color F0");//Define a cor do terminal (4->Fundo e F->Cor das letras)
+   system("color F0");//Define a cor do terminal (F->Fundo e 0->Cor das letras)
    criarLinhaSuperior(tam);
    CriarMenu(tam,"Menu PILHA");
    CriarMenu(tam,"1 - Faz uma copia para FILA");
